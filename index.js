@@ -256,6 +256,21 @@ async function run() {
       const deleteSubCategory = await subcategories.deleteOne(query);
       res.send(deleteSubCategory);
     });
+    // ---------- Edit Subcategory
+    app.patch("/api/editsubcategory/:subcategoryid", async (req, res) => {
+      const subCategoryId = req.params.subcategoryid;
+      const { name, mainCategory } = req.body;
+      const query = { subCategoryId: subCategoryId };
+      const options = { upsert: true };
+      const updateDoc = {
+        $set: {
+          name,
+          mainCategory,
+        },
+      };
+      const result = await subcategories.updateOne(query, updateDoc, options);
+      res.send(result);
+    });
     // ----------------------------------------------------------Imported Country Route----------------------------------------------------------
     app.get("/api/importedcountry", async (req, res) => {
       const result = await importedCountries.find().toArray();
