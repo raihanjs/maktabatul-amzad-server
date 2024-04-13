@@ -211,6 +211,20 @@ async function run() {
       const deleteCategory = await categories.deleteOne(query);
       res.send(deleteCategory);
     });
+    // ---------- Edit Category
+    app.patch("/api/editcategory/:categoryid", async (req, res) => {
+      const categoryid = req.params.categoryid;
+      const query = { categoryId: categoryid };
+      const options = { upsert: true };
+      const updateDoc = {
+        $set: {
+          name: req.body.name,
+        },
+      };
+      const result = await categories.updateOne(query, updateDoc, options);
+      res.send(result);
+    });
+
     // ----------------------------------------------------------Sub Category Route----------------------------------------------------------
     app.get("/api/subcategories", async (req, res) => {
       const allSubCategories = await subcategories.find().toArray();
