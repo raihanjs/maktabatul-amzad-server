@@ -140,7 +140,7 @@ async function run() {
     app.delete("/api/deleteeditor/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
-      const deleteEditor = await writers.deleteOne(query);
+      const deleteEditor = await editors.deleteOne(query);
       res.send(deleteEditor);
     });
     // ----------------------------------------------------------Publisher Route----------------------------------------------------------
