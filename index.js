@@ -169,17 +169,17 @@ async function run() {
     });
     // ---------- Get Translator by translatorId
     app.get("/api/translators/:translatorId", async (req, res) => {
-      const translator = await editors.findOne({
+      const translator = await translators.findOne({
         translatorId: req.params.translatorId,
       });
       res.send(translator);
     });
-    // ---------- Add Editor
+    // ---------- Add Translator
     app.post("/api/addtranslator", async (req, res) => {
       const translator = await translators.insertOne(req.body);
       res.send(translator);
     });
-    // ---------- Edit Editor
+    // ---------- Edit Translator
     app.patch("/api/edittranslator/:translatorId", async (req, res) => {
       const translatorId = req.params.translatorId;
       const query = { translatorId: translatorId };
