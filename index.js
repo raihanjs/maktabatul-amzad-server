@@ -131,6 +131,18 @@ async function run() {
       const allEditors = await editors.find().toArray();
       res.status(200).json(allEditors);
     });
+    // ---------- Add Editor
+    app.post("/api/addeditor", async (req, res) => {
+      const editor = await editors.insertOne(req.body);
+      res.send(editor);
+    });
+    // ---------- Delete Editor
+    app.delete("/api/deleteeditor/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const deleteEditor = await writers.deleteOne(query);
+      res.send(deleteEditor);
+    });
     // ----------------------------------------------------------Publisher Route----------------------------------------------------------
     app.get("/api/publishers", async (req, res) => {
       const allPublishers = await publishers.find().toArray();
@@ -234,7 +246,7 @@ async function run() {
     app.post("/api/subcategories/getsubCategory", async (req, res) => {
       const query = req.body;
       const subCategory = await subcategories.find(query).toArray();
-      res.status(200).json(subCategory);
+      res.send(subCategory);
     });
     // ---------- Get sub category by subCategoryId
     app.get("/api/subcategories/:subCategoryId", async (req, res) => {
