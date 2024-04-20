@@ -136,6 +136,19 @@ async function run() {
       const editor = await editors.insertOne(req.body);
       res.send(editor);
     });
+    // ---------- Edit Editor
+    app.patch("/api/editeditor/:editorId", async (req, res) => {
+      const editorId = req.params.editorId;
+      const query = { editorId: editorId };
+      const options = { upsert: true };
+      const updateDoc = {
+        $set: {
+          name: req.body.name,
+        },
+      };
+      const result = await editors.updateOne(query, updateDoc, options);
+      res.send(result);
+    });
     // ---------- Delete Editor
     app.delete("/api/deleteeditor/:id", async (req, res) => {
       const id = req.params.id;
