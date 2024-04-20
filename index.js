@@ -30,6 +30,7 @@ async function run() {
     const books = database.collection("books");
     const writers = database.collection("writers");
     const editors = database.collection("editors");
+    const translators = database.collection("translators");
     const publishers = database.collection("publishers");
     const categories = database.collection("categories");
     const subcategories = database.collection("subcategories");
@@ -160,6 +161,43 @@ async function run() {
       const query = { _id: new ObjectId(id) };
       const deleteEditor = await editors.deleteOne(query);
       res.send(deleteEditor);
+    });
+    // ----------------------------------------------------------Translator Route----------------------------------------------------------
+    app.get("/api/translators", async (req, res) => {
+      const allTranslators = await translators.find().toArray();
+      res.send(allTranslators);
+    });
+    // ---------- Get Translator by translatorId
+    app.get("/api/translators/:translatorId", async (req, res) => {
+      const translator = await editors.findOne({
+        translatorId: req.params.translatorId,
+      });
+      res.send(translator);
+    });
+    // ---------- Add Editor
+    app.post("/api/addtranslator", async (req, res) => {
+      const translator = await translators.insertOne(req.body);
+      res.send(translator);
+    });
+    // ---------- Edit Editor
+    app.patch("/api/edittranslator/:translatorId", async (req, res) => {
+      const translatorId = req.params.translatorId;
+      const query = { translatorId: translatorId };
+      const options = { upsert: true };
+      const updateDoc = {
+        $set: {
+          name: req.body.name,
+        },
+      };
+      const result = await translators.updateOne(query, updateDoc, options);
+      res.send(result);
+    });
+    // ---------- Delete Editor
+    app.delete("/api/deletetranslator/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const deletetranslator = await translators.deleteOne(query);
+      res.send(deletetranslator);
     });
     // ----------------------------------------------------------Publisher Route----------------------------------------------------------
     app.get("/api/publishers", async (req, res) => {
