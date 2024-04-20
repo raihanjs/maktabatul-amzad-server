@@ -131,6 +131,11 @@ async function run() {
       const allEditors = await editors.find().toArray();
       res.status(200).json(allEditors);
     });
+    // ---------- Get Editor by editorId
+    app.get("/api/editors/:editorId", async (req, res) => {
+      const editor = await editors.findOne({ editorId: req.params.editorId });
+      res.send(editor);
+    });
     // ---------- Add Editor
     app.post("/api/addeditor", async (req, res) => {
       const editor = await editors.insertOne(req.body);
