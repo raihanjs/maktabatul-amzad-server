@@ -58,7 +58,7 @@ async function run() {
     app.get("/api/books/:id", async (req, res) => {
       const query = { _id: new ObjectId(req.params.id) };
       const book = await books.findOne(query);
-      res.status(200).json(book);
+      res.send(book);
     });
     // ---------- Get book categoryId by push method
     app.post("/api/books/getcategory", async (req, res) => {
@@ -77,6 +77,51 @@ async function run() {
     app.post("/api/addbook", async (req, res) => {
       const book = await books.insertOne(req.body);
       res.send(book);
+    });
+
+    // ---------- Edit Book
+    app.patch("/api/editbook/:id", async (req, res) => {
+      const bookId = req.params.id;
+      const {
+        thumb,
+        title,
+        category,
+        subCategory,
+        writer,
+        translator,
+        editor,
+        publisher,
+        importedCountry,
+        price,
+        pages,
+        stock,
+        desc,
+        status,
+        sold,
+      } = req.body;
+      const query = { _id: new ObjectId(bookId) };
+      const options = { upsert: true };
+      const updateDoc = {
+        $set: {
+          thumb,
+          title,
+          category,
+          subCategory,
+          writer,
+          translator,
+          editor,
+          publisher,
+          importedCountry,
+          price,
+          pages,
+          stock,
+          desc,
+          status,
+          sold,
+        },
+      };
+      const result = await books.updateOne(query, updateDoc, options);
+      res.send(result);
     });
     // ---------- Delete Book
     app.delete("/api/deletebook/:id", async (req, res) => {
