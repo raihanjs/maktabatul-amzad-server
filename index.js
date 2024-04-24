@@ -340,8 +340,20 @@ async function run() {
 
     // ----------------------------------------------------------Sub Category Route----------------------------------------------------------
     app.get("/api/subcategories", async (req, res) => {
-      const allSubCategories = await subcategories.find().toArray();
-      res.status(200).json(allSubCategories);
+      const allSubCategories = await database
+        .collection("subcategories")
+        .aggregate([
+          {
+            $lookup: {
+              from: "categories",
+              localField: "mainCategory",
+              foreignField: "categoryId",
+              as: "mainCategoryDetails",
+            },
+          },
+        ])
+        .toArray();
+      res.send(allSubCategories);
     });
     // ---------- Get subcategory by post method
     app.post("/api/subcategories/getsubCategory", async (req, res) => {
