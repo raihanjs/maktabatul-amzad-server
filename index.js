@@ -56,8 +56,63 @@ async function run() {
     });
     // ---------- Get book by id
     app.get("/api/books/:id", async (req, res) => {
-      const query = { _id: new ObjectId(req.params.id) };
-      const book = await books.findOne(query);
+      const allBooks = await database
+        .collection("books")
+        .aggregate([
+          {
+            $lookup: {
+              from: "writers",
+              localField: "writer",
+              foreignField: "writerId",
+              as: "writerDetails",
+            },
+          },
+          {
+            $lookup: {
+              from: "translators",
+              localField: "translator",
+              foreignField: "translatorId",
+              as: "translatorDetails",
+            },
+          },
+          {
+            $lookup: {
+              from: "editors",
+              localField: "editor",
+              foreignField: "editorId",
+              as: "editorDetails",
+            },
+          },
+          {
+            $lookup: {
+              from: "publishers",
+              localField: "publisher",
+              foreignField: "publisherId",
+              as: "publisherDetails",
+            },
+          },
+          {
+            $lookup: {
+              from: "categories",
+              localField: "category",
+              foreignField: "categoryId",
+              as: "categoryDetails",
+            },
+          },
+          {
+            $lookup: {
+              from: "subcategories",
+              localField: "subCategory",
+              foreignField: "subCategoryId",
+              as: "subCategoryDetails",
+            },
+          },
+        ])
+        .toArray();
+      const book = allBooks.find((singleBook) => {
+        let str = singleBook._id + "";
+        return str === req.params.id;
+      });
       res.send(book);
     });
     // ---------- Get book categoryId by push method
