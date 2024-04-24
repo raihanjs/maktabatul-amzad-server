@@ -107,6 +107,14 @@ async function run() {
               as: "subCategoryDetails",
             },
           },
+          {
+            $lookup: {
+              from: "importedCountries",
+              localField: "importedCountry",
+              foreignField: "countryId",
+              as: "importedCountryDetails",
+            },
+          },
         ])
         .toArray();
       const book = allBooks.find((singleBook) => {
@@ -117,10 +125,23 @@ async function run() {
     });
     // ---------- Get book categoryId by push method
     app.post("/api/books/getcategory", async (req, res) => {
-      const query = req.body;
-      console.log(query);
-      const getBooks = await books.find(query).toArray();
-      res.status(200).json(getBooks);
+      const allBooks = await database
+        .collection("books")
+        .aggregate([
+          {
+            $lookup: {
+              from: "writers",
+              localField: "writer",
+              foreignField: "writerId",
+              as: "writerDetails",
+            },
+          },
+        ])
+        .toArray();
+      const books = allBooks.filter(
+        (book) => book.category === req.body.category
+      );
+      res.send(books);
     });
     // ---------- Get book subcategoryid by push method
     // app.post("/api/books/getcategory", async (req, res) => {
@@ -128,12 +149,12 @@ async function run() {
     //   const getBooks = await books.find(query).toArray();
     //   res.status(200).json(getBooks);
     // });
+
     // ---------- Add Book
     app.post("/api/addbook", async (req, res) => {
       const book = await books.insertOne(req.body);
       res.send(book);
     });
-
     // ---------- Edit Book
     app.patch("/api/editbook/:id", async (req, res) => {
       const bookId = req.params.id;
