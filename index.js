@@ -50,6 +50,54 @@ async function run() {
               as: "writerDetails",
             },
           },
+          {
+            $lookup: {
+              from: "translators",
+              localField: "translator",
+              foreignField: "translatorId",
+              as: "translatorDetails",
+            },
+          },
+          {
+            $lookup: {
+              from: "editors",
+              localField: "editor",
+              foreignField: "editorId",
+              as: "editorDetails",
+            },
+          },
+          {
+            $lookup: {
+              from: "publishers",
+              localField: "publisher",
+              foreignField: "publisherId",
+              as: "publisherDetails",
+            },
+          },
+          {
+            $lookup: {
+              from: "categories",
+              localField: "category",
+              foreignField: "categoryId",
+              as: "categoryDetails",
+            },
+          },
+          {
+            $lookup: {
+              from: "subcategories",
+              localField: "subCategory",
+              foreignField: "subCategoryId",
+              as: "subCategoryDetails",
+            },
+          },
+          {
+            $lookup: {
+              from: "importedCountries",
+              localField: "importedCountry",
+              foreignField: "countryId",
+              as: "importedCountryDetails",
+            },
+          },
         ])
         .toArray();
       res.status(200).json(allBooks);
