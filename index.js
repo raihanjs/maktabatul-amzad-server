@@ -35,6 +35,7 @@ async function run() {
     const categories = database.collection("categories");
     const subcategories = database.collection("subcategories");
     const importedCountries = database.collection("importedCountries");
+    const carts = database.collection("carts");
 
     // ----------------------------------------------------------Book Route----------------------------------------------------------
     app.get("/api/books", async (req, res) => {
@@ -492,7 +493,6 @@ async function run() {
       });
       res.status(200).json(subCategory);
     });
-
     // ---------- Add Subcategory
     app.post("/api/addsubsubject", async (req, res) => {
       const subcategory = await subcategories.insertOne(req.body);
@@ -535,7 +535,6 @@ async function run() {
       const result = await importedCountries.insertOne(req.body);
       res.send(result);
     });
-
     app.patch("/api/editimportedcountry/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
@@ -552,11 +551,17 @@ async function run() {
       );
       res.send(result);
     });
-
     app.delete("/api/deleteimportedcountry/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await importedCountries.deleteOne(query);
+      res.send(result);
+    });
+    // ----------------------------------------------------------Order Route----------------------------------------------------------
+    app.post("/api/addcart", async (req, res) => {
+      const cart = req.body;
+      cart.timestamp = new Date();
+      const result = await carts.insertOne(cart);
       res.send(result);
     });
     // Connect the client to the server	(optional starting in v4.7)
