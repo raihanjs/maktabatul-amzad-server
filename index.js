@@ -564,6 +564,31 @@ async function run() {
       const result = await carts.insertOne(cart);
       res.send(result);
     });
+    // Get orders list
+    app.get("/api/orders", async (req, res) => {
+      const allOrders = await carts.find().toArray();
+      res.send(allOrders);
+    });
+
+    // Update order status
+    app.patch("/api/orders/:orderid", async (req, res) => {
+      const orderId = req.params.orderid;
+      const query = { _id: new ObjectId(orderId) };
+      const updateDoc = {
+        $set: {
+          status: req.body.editedStatus,
+        },
+      };
+      const result = await carts.updateOne(query, updateDoc);
+      res.send(result);
+    });
+    // Delete Order
+    app.delete("/api/orders/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await carts.deleteOne(query);
+      res.send(result);
+    });
     // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
     // Send a ping to confirm a successful connection
