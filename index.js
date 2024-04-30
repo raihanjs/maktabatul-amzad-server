@@ -606,6 +606,31 @@ async function run() {
       const result = await users.insertOne(user);
       res.send(result);
     });
+    // Get Single user by email -------------
+    app.get("/api/users", async (req, res) => {
+      const email = req.query.email;
+      if (email) {
+        const singleUser = await users.findOne({ email: email });
+        return res.send(singleUser);
+      }
+    });
+
+    // Update user ----------------------------
+    app.patch("/api/users/:id", async (req, res) => {
+      const id = req.params.id;
+      const { name, address, phone } = req.body;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateDoc = {
+        $set: {
+          name: name,
+          address: address,
+          phone: phone,
+        },
+      };
+      const result = await users.updateOne(filter, updateDoc, options);
+      res.send(result);
+    });
 
     // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
