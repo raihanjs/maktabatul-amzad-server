@@ -27,15 +27,17 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     const database = client.db("maktabatul-amzad");
+
     const books = database.collection("books");
+    const carts = database.collection("carts");
+    const users = database.collection("users");
     const writers = database.collection("writers");
     const editors = database.collection("editors");
-    const translators = database.collection("translators");
-    const publishers = database.collection("publishers");
     const categories = database.collection("categories");
+    const publishers = database.collection("publishers");
+    const translators = database.collection("translators");
     const subcategories = database.collection("subcategories");
     const importedCountries = database.collection("importedCountries");
-    const carts = database.collection("carts");
 
     // ----------------------------------------------------------Book Route----------------------------------------------------------
     app.get("/api/books", async (req, res) => {
@@ -569,7 +571,6 @@ async function run() {
       const allOrders = await carts.find().toArray();
       res.send(allOrders);
     });
-
     // Update order status
     app.patch("/api/orders/:orderid", async (req, res) => {
       const orderId = req.params.orderid;
@@ -589,6 +590,23 @@ async function run() {
       const result = await carts.deleteOne(query);
       res.send(result);
     });
+
+    // ----------------------------------------------------------User Route----------------------------------------------------------
+    // Create User --------------
+    app.post("/api/users", async (req, res) => {
+      const user = req.body;
+
+      const query = { email: user.email };
+      const existUser = await users.findOne(query);
+
+      if (existUser) {
+        return res.send("User Already Exist");
+      }
+
+      const result = await users.insertOne(user);
+      res.send(result);
+    });
+
     // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
     // Send a ping to confirm a successful connection
