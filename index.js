@@ -568,6 +568,12 @@ async function run() {
     });
     // Get orders list
     app.get("/api/orders", async (req, res) => {
+      const email = req.query.email;
+      if (email) {
+        const query = { mail: email };
+        const orders = await carts.find(query).toArray();
+        return res.send(orders);
+      }
       const allOrders = await carts.find().toArray();
       res.send(allOrders);
     });
