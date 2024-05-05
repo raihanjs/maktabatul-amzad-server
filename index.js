@@ -41,10 +41,15 @@ async function run() {
 
     // ----------------------------------------------------------Book Route----------------------------------------------------------
     app.get("/api/books", async (req, res) => {
-      // const allBooks = await books.find().toArray();
+      const searchQuery = req.query.title || "";
       const allBooks = await database
         .collection("books")
         .aggregate([
+          {
+            $match: {
+              $or: [{ title: { $regex: searchQuery, $options: "i" } }],
+            },
+          },
           {
             $lookup: {
               from: "writers",
