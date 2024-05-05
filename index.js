@@ -400,7 +400,7 @@ async function run() {
       res.send(publisher);
     });
     // ---------- Edit Publisher
-    app.patch("/api/editimportedcountry/:id", async (req, res) => {
+    app.patch("/api/editpublisher/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const options = { upsert: true };
