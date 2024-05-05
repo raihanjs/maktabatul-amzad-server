@@ -42,12 +42,18 @@ async function run() {
     // ----------------------------------------------------------Book Route----------------------------------------------------------
     app.get("/api/books", async (req, res) => {
       const searchQuery = req.query.title || "";
+      const sortQuery = parseInt(req.query.sort) || 1;
       const allBooks = await database
         .collection("books")
         .aggregate([
           {
             $match: {
               $or: [{ title: { $regex: searchQuery, $options: "i" } }],
+            },
+          },
+          {
+            $sort: {
+              price: sortQuery,
             },
           },
           {
