@@ -40,21 +40,42 @@ async function run() {
     const importedCountries = database.collection("importedCountries");
 
     // ----------------------------------------------------------Book Route----------------------------------------------------------
+    app.get("/api/bookslength", async (req, res) => {
+      const allBooks = await books.find().toArray();
+      res.send(allBooks.length);
+    });
+
     app.get("/api/books", async (req, res) => {
       const searchQuery = req.query.title || "";
       const sortQuery = parseInt(req.query.sort) || 1;
+
+      const gte = parseInt(req.query.gte) || 0;
+      const lte = parseInt(req.query.lte) || 50000;
+
+      // Pagination
+      const page = parseInt(req.query.page) || 0;
+      const size = parseInt(req.query.size) || 10;
+      const skip = page * size;
+
       const allBooks = await database
         .collection("books")
         .aggregate([
           {
             $match: {
               $or: [{ title: { $regex: searchQuery, $options: "i" } }],
+              price: { $gte: gte, $lte: lte },
             },
           },
           {
             $sort: {
               price: sortQuery,
             },
+          },
+          {
+            $skip: skip,
+          },
+          {
+            $limit: size,
           },
           {
             $lookup: {
