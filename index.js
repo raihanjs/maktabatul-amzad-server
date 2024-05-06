@@ -42,7 +42,8 @@ async function run() {
     // ----------------------------------------------------------Book Route----------------------------------------------------------
     app.get("/api/bookslength", async (req, res) => {
       const allBooks = await books.find().toArray();
-      res.send(allBooks.length);
+      const totalBooks = allBooks.length;
+      res.send({ totalBooks });
     });
 
     app.get("/api/books", async (req, res) => {
