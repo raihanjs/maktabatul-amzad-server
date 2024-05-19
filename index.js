@@ -258,6 +258,18 @@ async function run() {
         desc,
         status,
         sold,
+        showCategory,
+        showSubCategory,
+        showWriters,
+        showEditors,
+        showTranslators,
+        showImport,
+        showPublisher,
+        showPages,
+        showPrice,
+        showPieces,
+        showStatus,
+        showSummary,
       } = req.body;
       const query = { _id: new ObjectId(bookId) };
       const options = { upsert: true };
@@ -278,6 +290,18 @@ async function run() {
           desc,
           status,
           sold,
+          showCategory,
+          showSubCategory,
+          showWriters,
+          showEditors,
+          showTranslators,
+          showImport,
+          showPublisher,
+          showPages,
+          showPrice,
+          showPieces,
+          showStatus,
+          showSummary,
         },
       };
       const result = await books.updateOne(query, updateDoc, options);
