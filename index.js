@@ -56,11 +56,26 @@ async function run() {
       const banner = await banners.findOne(query);
       res.send(banner);
     });
-
     app.delete("/api/banners/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await banners.deleteOne(query);
+      res.send(result);
+    });
+    app.patch("/api/banners/:id", async (req, res) => {
+      const id = req.params.id;
+      const { thumb, title, test, isActive } = req.body;
+      const query = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateDoc = {
+        $set: {
+          thumb,
+          title,
+          test,
+          isActive,
+        },
+      };
+      const result = await banners.updateOne(query, updateDoc, options);
       res.send(result);
     });
     // ----------------------------------------------------------Book Route----------------------------------------------------------
