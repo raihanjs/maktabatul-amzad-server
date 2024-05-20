@@ -56,6 +56,13 @@ async function run() {
       const banners = await banners.findOne(query);
       res.send(banners);
     });
+
+    app.delete("/api/banners", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await banners.deleteOne(query);
+      res.send(result);
+    });
     // ----------------------------------------------------------Book Route----------------------------------------------------------
     app.get("/api/bookslength", async (req, res) => {
       const allBooks = await books.find().toArray();
