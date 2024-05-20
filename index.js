@@ -28,6 +28,7 @@ async function run() {
   try {
     const database = client.db("maktabatul-amzad");
 
+    const banners = database.collection("banners");
     const books = database.collection("books");
     const carts = database.collection("carts");
     const users = database.collection("users");
@@ -39,6 +40,22 @@ async function run() {
     const subcategories = database.collection("subcategories");
     const importedCountries = database.collection("importedCountries");
 
+    // ----------------------------------------------------------Banner Route----------------------------------------------------------
+    app.post("/api/addbanner", async (req, res) => {
+      const banner = await banners.insertOne(req.body);
+      res.send(banner);
+    });
+
+    app.get("/api/banners", async (req, res) => {
+      const banners = await banners.find().toArray();
+      res.send(banners);
+    });
+    app.get("/api/banners/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const banners = await banners.findOne(query);
+      res.send(banners);
+    });
     // ----------------------------------------------------------Book Route----------------------------------------------------------
     app.get("/api/bookslength", async (req, res) => {
       const allBooks = await books.find().toArray();
