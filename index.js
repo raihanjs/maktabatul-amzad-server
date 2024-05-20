@@ -57,7 +57,7 @@ async function run() {
       res.send(banners);
     });
 
-    app.delete("/api/banners", async (req, res) => {
+    app.delete("/api/banners/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await banners.deleteOne(query);
