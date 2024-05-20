@@ -47,8 +47,8 @@ async function run() {
     });
 
     app.get("/api/banners", async (req, res) => {
-      const banners = await banners.find().toArray();
-      res.send(banners);
+      const allBanners = await banners.find().toArray();
+      res.send(allBanners);
     });
     app.get("/api/banners/:id", async (req, res) => {
       const id = req.params.id;
