@@ -53,8 +53,8 @@ async function run() {
     app.get("/api/banners/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
-      const banners = await banners.findOne(query);
-      res.send(banners);
+      const banner = await banners.findOne(query);
+      res.send(banner);
     });
 
     app.delete("/api/banners/:id", async (req, res) => {
