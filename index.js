@@ -523,6 +523,7 @@ async function run() {
       const updateDoc = {
         $set: {
           name: req.body.name,
+          image: req.body.image,
         },
       };
       const result = await publishers.updateOne(query, updateDoc, options);
