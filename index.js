@@ -89,8 +89,8 @@ async function run() {
       const searchQuery = req.query.title || "";
       const sortQuery = parseInt(req.query.sort) || 1;
 
-      const gte = parseInt(req.query.gte) || 0;
-      const lte = parseInt(req.query.lte) || 50000;
+      const gte = parseInt(req.query.gte) || 50000;
+      const lte = parseInt(req.query.lte) || 0;
 
       // Pagination
       const page = parseInt(req.query.page) || 0;
