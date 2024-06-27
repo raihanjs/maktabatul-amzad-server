@@ -32,6 +32,8 @@ async function run() {
     const editors = database.collection("editors");
     const translators = database.collection("translators");
     const publishers = database.collection("publishers");
+    const categories = database.collection("categories");
+    const subCategories = database.collection("subCategories");
 
     // -------------------------------Books Route-------------------------------
     // get all books
@@ -181,6 +183,66 @@ async function run() {
     app.delete("/publishers/:id", async (req, res) => {
       const query = { _id: new ObjectId(id) };
       const result = await publishers.deleteOne(query);
+      res.send(result);
+    });
+    // -------------------------------Categories Route-------------------------------
+    // get all categories
+    app.get("/categories", async (req, res) => {
+      const result = await categories.find().toArray();
+      res.send(result);
+    });
+    // get single categories by id
+    app.get("/categories/:id", async (req, res) => {
+      const query = { _id: new ObjectId(req.params.id) };
+      const result = await categories.findOne(query);
+      res.send(result);
+    });
+    // add a categories
+    app.post("/categories", async (req, res) => {
+      const result = await categories.insertOne(req.body);
+      res.send(result);
+    });
+    // edit categories
+    app.patch("/categories/:id", async (req, res) => {
+      const query = { _id: new ObjectId(req.params.id) };
+      delete req.body._id;
+      const result = await categories.updateOne(query, { $set: req.body });
+      res.send(result);
+    });
+    // delete categories
+    app.delete("/categories/:id", async (req, res) => {
+      const query = { _id: new ObjectId(id) };
+      const result = await categories.deleteOne(query);
+      res.send(result);
+    });
+    // -------------------------------Sub Categories Route-------------------------------
+    // get all sub categories
+    app.get("/subcategories", async (req, res) => {
+      const result = await subCategories.find().toArray();
+      res.send(result);
+    });
+    // get single sub categories by id
+    app.get("/subcategories/:id", async (req, res) => {
+      const query = { _id: new ObjectId(req.params.id) };
+      const result = await subCategories.findOne(query);
+      res.send(result);
+    });
+    // add a sub categories
+    app.post("/subcategories", async (req, res) => {
+      const result = await subCategories.insertOne(req.body);
+      res.send(result);
+    });
+    // edit sub categories
+    app.patch("/subcategories/:id", async (req, res) => {
+      const query = { _id: new ObjectId(req.params.id) };
+      delete req.body._id;
+      const result = await subCategories.updateOne(query, { $set: req.body });
+      res.send(result);
+    });
+    // delete sub categories
+    app.delete("/subcategories/:id", async (req, res) => {
+      const query = { _id: new ObjectId(id) };
+      const result = await subCategories.deleteOne(query);
       res.send(result);
     });
   } finally {
