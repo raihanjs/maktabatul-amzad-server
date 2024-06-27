@@ -29,6 +29,8 @@ async function run() {
     const database = client.db("maktabatul-amzad");
     const books = database.collection("books");
     const writers = database.collection("writers");
+    const editors = database.collection("editors");
+    const translators = database.collection("translators");
 
     // -------------------------------Books Route-------------------------------
     // get all books
@@ -88,6 +90,66 @@ async function run() {
     app.delete("/writers/:id", async (req, res) => {
       const query = { _id: new ObjectId(id) };
       const result = await writers.deleteOne(query);
+      res.send(result);
+    });
+    // -------------------------------Editors Route-------------------------------
+    // get all editors
+    app.get("/editors", async (req, res) => {
+      const result = await editors.find().toArray();
+      res.send(result);
+    });
+    // get single editors by id
+    app.get("/editors/:id", async (req, res) => {
+      const query = { _id: new ObjectId(req.params.id) };
+      const result = await editors.findOne(query);
+      res.send(result);
+    });
+    // add a editors
+    app.post("/editors", async (req, res) => {
+      const result = await editors.insertOne(req.body);
+      res.send(result);
+    });
+    // edit editors
+    app.patch("/editors/:id", async (req, res) => {
+      const query = { _id: new ObjectId(req.params.id) };
+      delete req.body._id;
+      const result = await editors.updateOne(query, { $set: req.body });
+      res.send(result);
+    });
+    // delete editors
+    app.delete("/editors/:id", async (req, res) => {
+      const query = { _id: new ObjectId(id) };
+      const result = await editors.deleteOne(query);
+      res.send(result);
+    });
+    // -------------------------------Translators Route-------------------------------
+    // get all translators
+    app.get("/translators", async (req, res) => {
+      const result = await translators.find().toArray();
+      res.send(result);
+    });
+    // get single translators by id
+    app.get("/translators/:id", async (req, res) => {
+      const query = { _id: new ObjectId(req.params.id) };
+      const result = await translators.findOne(query);
+      res.send(result);
+    });
+    // add a translators
+    app.post("/translators", async (req, res) => {
+      const result = await translators.insertOne(req.body);
+      res.send(result);
+    });
+    // edit translators
+    app.patch("/translators/:id", async (req, res) => {
+      const query = { _id: new ObjectId(req.params.id) };
+      delete req.body._id;
+      const result = await translators.updateOne(query, { $set: req.body });
+      res.send(result);
+    });
+    // delete translators
+    app.delete("/translators/:id", async (req, res) => {
+      const query = { _id: new ObjectId(id) };
+      const result = await translators.deleteOne(query);
       res.send(result);
     });
   } finally {
