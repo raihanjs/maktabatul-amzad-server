@@ -69,6 +69,12 @@ async function run() {
       const result = await banners.updateOne(query, { $set: req.body });
       res.send(result);
     });
+    // delete banner
+    app.delete("/banners/:id", async (req, res) => {
+      const query = { _id: new ObjectId(req.params.id) };
+      const result = await banners.deleteOne(query);
+      res.send(result);
+    });
     // -------------------------------Books Route-------------------------------
     // get all books
     app.get("/books", async (req, res) => {
@@ -95,7 +101,7 @@ async function run() {
     });
     // delete book
     app.delete("/books/:id", async (req, res) => {
-      const query = { _id: new ObjectId(id) };
+      const query = { _id: new ObjectId(req.params.id) };
       const result = await books.deleteOne(query);
       res.send(result);
     });
@@ -125,7 +131,7 @@ async function run() {
     });
     // delete writers
     app.delete("/writers/:id", async (req, res) => {
-      const query = { _id: new ObjectId(id) };
+      const query = { _id: new ObjectId(req.params.id) };
       const result = await writers.deleteOne(query);
       res.send(result);
     });
@@ -155,7 +161,7 @@ async function run() {
     });
     // delete editors
     app.delete("/editors/:id", async (req, res) => {
-      const query = { _id: new ObjectId(id) };
+      const query = { _id: new ObjectId(req.params.id) };
       const result = await editors.deleteOne(query);
       res.send(result);
     });
@@ -185,7 +191,7 @@ async function run() {
     });
     // delete translators
     app.delete("/translators/:id", async (req, res) => {
-      const query = { _id: new ObjectId(id) };
+      const query = { _id: new ObjectId(req.params.id) };
       const result = await translators.deleteOne(query);
       res.send(result);
     });
@@ -215,7 +221,7 @@ async function run() {
     });
     // delete publishers
     app.delete("/publishers/:id", async (req, res) => {
-      const query = { _id: new ObjectId(id) };
+      const query = { _id: new ObjectId(req.params.id) };
       const result = await publishers.deleteOne(query);
       res.send(result);
     });
@@ -245,7 +251,7 @@ async function run() {
     });
     // delete publishers
     app.delete("/publishers/:id", async (req, res) => {
-      const query = { _id: new ObjectId(id) };
+      const query = { _id: new ObjectId(req.params.id) };
       const result = await publishers.deleteOne(query);
       res.send(result);
     });
@@ -275,7 +281,7 @@ async function run() {
     });
     // delete categories
     app.delete("/categories/:id", async (req, res) => {
-      const query = { _id: new ObjectId(id) };
+      const query = { _id: new ObjectId(req.params.id) };
       const result = await categories.deleteOne(query);
       res.send(result);
     });
@@ -305,7 +311,7 @@ async function run() {
     });
     // delete sub categories
     app.delete("/subcategories/:id", async (req, res) => {
-      const query = { _id: new ObjectId(id) };
+      const query = { _id: new ObjectId(req.params.id) };
       const result = await subCategories.deleteOne(query);
       res.send(result);
     });
@@ -335,7 +341,7 @@ async function run() {
     });
     // delete Users
     app.delete("/users/:id", async (req, res) => {
-      const query = { _id: new ObjectId(id) };
+      const query = { _id: new ObjectId(req.params.id) };
       const result = await users.deleteOne(query);
       res.send(result);
     });
@@ -365,7 +371,7 @@ async function run() {
     });
     // delete orders
     app.delete("/orders/:id", async (req, res) => {
-      const query = { _id: new ObjectId(id) };
+      const query = { _id: new ObjectId(req.params.id) };
       const result = await orders.deleteOne(query);
       res.send(result);
     });
