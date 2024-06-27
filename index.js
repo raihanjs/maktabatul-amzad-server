@@ -250,9 +250,9 @@ async function run() {
       res.send(result);
     });
     // delete publishers
-    app.delete("/publishers/:id", async (req, res) => {
+    app.delete("/importers/:id", async (req, res) => {
       const query = { _id: new ObjectId(req.params.id) };
-      const result = await publishers.deleteOne(query);
+      const result = await importers.deleteOne(query);
       res.send(result);
     });
     // -------------------------------Categories Route-------------------------------

@@ -1,0 +1,137 @@
+[
+  {
+    "_id": "667de596bff781f3633378e7",
+    "name": ["মাকতাবাতুল আমজাদ", "Maktabatul Amzad", "مكتبة الأمجاد"],
+    "image": "https://i.ibb.co/jRMC6ct/888888.jpg"
+  },
+  {
+    "_id": "667de5aabff781f3633378e8",
+    "name": [
+      "দারুল হাদীস, মিশর, কায়রো",
+      "Darel Hadith, Egypt, Cairo ",
+      "دا رالحديث، مصر، القاهرة"
+    ],
+    "image": "https://i.ibb.co/Rb5gGwS/darul-hadith.jpg"
+  },
+  {
+    "_id": "667de5b1bff781f3633378e9",
+    "name": [
+      "দার ইবনুল জাওযী, কায়রো, মিশর",
+      "Dar ibn jawzi, cairo, egypt",
+      "دار ابن الجوزي ، مصر، القاهرة"
+    ],
+    "image": "https://i.ibb.co/mB3V3pp/445191633-832589498894819-2554241558632271322-n.jpg"
+  },
+  {
+    "_id": "667de5b8bff781f3633378ea",
+    "name": [
+      "মু’আস্সাতুর রিসালাহ, লেবানন",
+      "Mu'assatur Risalah, Lebanon",
+      "مئسسة الرسالة, لبنان"
+    ],
+    "image": "https://i.ibb.co/gyTJyRH/image.jpg"
+  },
+  {
+    "_id": "667de5c1bff781f3633378eb",
+    "name": [
+      "দারু ইবনে হাজম, বৈরুত, লেবানন",
+      "Daru Ibn Hazm, Beirut, Lebanon",
+      "دارو ابن حزم، بيروت، لبنان"
+    ],
+    "image": "https://i.ibb.co/2W9gFHx/b-Chs9-F3-FWQ1-GEd-Bs-Gipm-MR9-WRLh2j9rf-Opm-QDAFN.webp"
+  },
+  {
+    "_id": "667de5c8bff781f3633378ec",
+    "name": [
+      "রেসালাতুল আলামিয়া, বৈরুত, লেবানন",
+      "Resalatul Alamia, Beirut, Lebanon",
+      "الرسالة العالمية، بيروت، لبنان"
+    ],
+    "image": "https://i.ibb.co/VLwNxKz/logo.png"
+  },
+  {
+    "_id": "667de5cfbff781f3633378ed",
+    "name": [
+      "দারুল কলম, দামেস্ক, সিরিয়া",
+      "Darul Qalam, Damascus, Syria",
+      "دار القلم، دمشق، سوريا"
+    ],
+    "image": "https://i.ibb.co/Fx9Wnyw/LOGO.jpg"
+  },
+  {
+    "_id": "667de5d6bff781f3633378ee",
+    "name": [
+      "আল মাকতাবাতুত তাওফিকিইয়া, মিশর",
+      "Al Maktabat Tawfiqiyyah, Egypt",
+      "المكتبات التوفيقية، مصر"
+    ],
+    "image": "https://i.ibb.co/Cwzf0qp/books-library-com-12152217-Nc8-M9.jpg"
+  },
+  {
+    "_id": "667de5dbbff781f3633378ef",
+    "name": ["দারুস সালেহ, মিশর", "Darus Saleh, Egypt", "دار الصالح, مصر"],
+    "image": "https://i.ibb.co/JQL0wkc/images-1.jpg"
+  },
+  {
+    "_id": "667de5e1bff781f3633378f0",
+    "name": [
+      "মাকতাবাতুস সফা, মিশর",
+      "Maktabatus Safa, Egypt",
+      "مكتبة الصفا, مصر"
+    ],
+    "image": "https://i.ibb.co/N2X0QgS/images-2.jpg"
+  },
+  {
+    "_id": "667de5e8bff781f3633378f1",
+    "name": [
+      "মাকতাবাতুল আশরাফিয়া, ভারত",
+      "Maktabatul Ashrafia, India",
+      "مكتبة الأشرفية, هند"
+    ]
+  },
+  {
+    "_id": "667de5f0bff781f3633378f2",
+    "name": [
+      "মাকতাবাতুয যাকারিয়া, ভারত",
+      "Maktabatuz Zakaria, India",
+      "مكتبة الزكارية, هند"
+    ]
+  },
+  {
+    "_id": "667de5f6bff781f3633378f3",
+    "name": [
+      "মাকতাবাতুল বুশরা, পাকিস্থান",
+      "Maktabatul Bushra, Pakistan",
+      "مكتبة البشرى, باكستان"
+    ],
+    "image": "https://i.ibb.co/L52bzdS/1.jpg"
+  },
+  {
+    "_id": "667de5fcbff781f3633378f4",
+    "name": [
+      "মাকতাবাতুর রুশদ, রিয়াদ",
+      "Maktabatur Rushd, Riyadh",
+      "مكتبة الرشد, رياض"
+    ],
+    "image": "https://i.ibb.co/rct4DsC/images-3.jpg"
+  },
+  {
+    "_id": "667de60bbff781f3633378f5",
+    "name": ["দারুস সালাম, রিয়াদ", "Darus Salam, Riyadh", "دار السلام, رياض"],
+    "image": "https://i.ibb.co/kSFjyW3/books-library-com-11132228-Wi9-E0.jpg"
+  },
+  {
+    "_id": "667de612bff781f3633378f6",
+    "name": [
+      "দারুল কিতাবিল আরাবী",
+      "Darul Kitabil Arabic",
+      "دار الكتاب العربي"
+    ],
+    "image": "https://i.ibb.co/tHSQtMk/logo-2.png"
+  },
+  {
+    "_id": "667de619bff781f3633378f7",
+    "name": ["দারু ইবনে কাসির", "দারু ইবনে কাসির", "دار إبن كثير"],
+    "image": "https://i.ibb.co/9YxqwPQ/download.png"
+  }
+]
