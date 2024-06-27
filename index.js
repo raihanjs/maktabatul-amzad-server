@@ -27,6 +27,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     const database = client.db("maktabatul-amzad");
+    const banners = database.collection("banners");
     const books = database.collection("books");
     const writers = database.collection("writers");
     const editors = database.collection("editors");
@@ -35,6 +36,30 @@ async function run() {
     const categories = database.collection("categories");
     const subCategories = database.collection("subCategories");
 
+    // -------------------------------Banners Route-------------------------------
+    // get all banners
+    app.get("/banners", async (req, res) => {
+      const result = await banners.find().toArray();
+      res.send(result);
+    });
+    // get single book by id
+    app.get("/banners/:id", async (req, res) => {
+      const query = { _id: new ObjectId(req.params.id) };
+      const result = await banners.findOne(query);
+      res.send(result);
+    });
+    // add a book
+    app.post("/banners", async (req, res) => {
+      const result = await banners.insertOne(req.body);
+      res.send(result);
+    });
+    // edit book
+    app.patch("/banners/:id", async (req, res) => {
+      const query = { _id: new ObjectId(req.params.id) };
+      delete req.body._id;
+      const result = await banners.updateOne(query, { $set: req.body });
+      res.send(result);
+    });
     // -------------------------------Books Route-------------------------------
     // get all books
     app.get("/books", async (req, res) => {
