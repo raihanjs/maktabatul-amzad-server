@@ -33,6 +33,7 @@ async function run() {
     const editors = database.collection("editors");
     const translators = database.collection("translators");
     const publishers = database.collection("publishers");
+    const importers = database.collection("importers");
     const categories = database.collection("categories");
     const subCategories = database.collection("subCategories");
 
@@ -42,18 +43,18 @@ async function run() {
       const result = await banners.find().toArray();
       res.send(result);
     });
-    // get single book by id
+    // get single banner by id
     app.get("/banners/:id", async (req, res) => {
       const query = { _id: new ObjectId(req.params.id) };
       const result = await banners.findOne(query);
       res.send(result);
     });
-    // add a book
+    // add a banner
     app.post("/banners", async (req, res) => {
       const result = await banners.insertOne(req.body);
       res.send(result);
     });
-    // edit book
+    // edit banner
     app.patch("/banners/:id", async (req, res) => {
       const query = { _id: new ObjectId(req.params.id) };
       delete req.body._id;
@@ -202,6 +203,36 @@ async function run() {
       const query = { _id: new ObjectId(req.params.id) };
       delete req.body._id;
       const result = await publishers.updateOne(query, { $set: req.body });
+      res.send(result);
+    });
+    // delete publishers
+    app.delete("/publishers/:id", async (req, res) => {
+      const query = { _id: new ObjectId(id) };
+      const result = await publishers.deleteOne(query);
+      res.send(result);
+    });
+    // -------------------------------Importers Route-------------------------------
+    // get all importers
+    app.get("/importers", async (req, res) => {
+      const result = await importers.find().toArray();
+      res.send(result);
+    });
+    // get single importers by id
+    app.get("/importers/:id", async (req, res) => {
+      const query = { _id: new ObjectId(req.params.id) };
+      const result = await importers.findOne(query);
+      res.send(result);
+    });
+    // add a importers
+    app.post("/importers", async (req, res) => {
+      const result = await importers.insertOne(req.body);
+      res.send(result);
+    });
+    // edit importers
+    app.patch("/importers/:id", async (req, res) => {
+      const query = { _id: new ObjectId(req.params.id) };
+      delete req.body._id;
+      const result = await importers.updateOne(query, { $set: req.body });
       res.send(result);
     });
     // delete publishers
