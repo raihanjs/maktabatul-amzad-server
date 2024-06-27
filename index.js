@@ -27,13 +27,21 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     const database = client.db("maktabatul-amzad");
+
+    const users = database.collection("users");
+    const orders = database.collection("users");
+
     const banners = database.collection("banners");
+
     const books = database.collection("books");
+
     const writers = database.collection("writers");
     const editors = database.collection("editors");
     const translators = database.collection("translators");
+
     const publishers = database.collection("publishers");
     const importers = database.collection("importers");
+
     const categories = database.collection("categories");
     const subCategories = database.collection("subCategories");
 
@@ -299,6 +307,66 @@ async function run() {
     app.delete("/subcategories/:id", async (req, res) => {
       const query = { _id: new ObjectId(id) };
       const result = await subCategories.deleteOne(query);
+      res.send(result);
+    });
+    // -------------------------------Users Route-------------------------------
+    // get all Users
+    app.get("/users", async (req, res) => {
+      const result = await users.find().toArray();
+      res.send(result);
+    });
+    // get single Users by id
+    app.get("/users/:id", async (req, res) => {
+      const query = { _id: new ObjectId(req.params.id) };
+      const result = await users.findOne(query);
+      res.send(result);
+    });
+    // add a Users
+    app.post("/users", async (req, res) => {
+      const result = await users.insertOne(req.body);
+      res.send(result);
+    });
+    // edit Users
+    app.patch("/users/:id", async (req, res) => {
+      const query = { _id: new ObjectId(req.params.id) };
+      delete req.body._id;
+      const result = await users.updateOne(query, { $set: req.body });
+      res.send(result);
+    });
+    // delete Users
+    app.delete("/users/:id", async (req, res) => {
+      const query = { _id: new ObjectId(id) };
+      const result = await users.deleteOne(query);
+      res.send(result);
+    });
+    // -------------------------------Orders Route-------------------------------
+    // get all orders
+    app.get("/orders", async (req, res) => {
+      const result = await orders.find().toArray();
+      res.send(result);
+    });
+    // get single orders by id
+    app.get("/orders/:id", async (req, res) => {
+      const query = { _id: new ObjectId(req.params.id) };
+      const result = await orders.findOne(query);
+      res.send(result);
+    });
+    // add a orders
+    app.post("/orders", async (req, res) => {
+      const result = await orders.insertOne(req.body);
+      res.send(result);
+    });
+    // edit orders
+    app.patch("/orders/:id", async (req, res) => {
+      const query = { _id: new ObjectId(req.params.id) };
+      delete req.body._id;
+      const result = await orders.updateOne(query, { $set: req.body });
+      res.send(result);
+    });
+    // delete orders
+    app.delete("/orders/:id", async (req, res) => {
+      const query = { _id: new ObjectId(id) };
+      const result = await orders.deleteOne(query);
       res.send(result);
     });
   } finally {
