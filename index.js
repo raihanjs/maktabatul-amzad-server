@@ -31,6 +31,7 @@ async function run() {
     const writers = database.collection("writers");
     const editors = database.collection("editors");
     const translators = database.collection("translators");
+    const publishers = database.collection("publishers");
 
     // -------------------------------Books Route-------------------------------
     // get all books
@@ -150,6 +151,36 @@ async function run() {
     app.delete("/translators/:id", async (req, res) => {
       const query = { _id: new ObjectId(id) };
       const result = await translators.deleteOne(query);
+      res.send(result);
+    });
+    // -------------------------------Publishers Route-------------------------------
+    // get all publishers
+    app.get("/publishers", async (req, res) => {
+      const result = await publishers.find().toArray();
+      res.send(result);
+    });
+    // get single publishers by id
+    app.get("/publishers/:id", async (req, res) => {
+      const query = { _id: new ObjectId(req.params.id) };
+      const result = await publishers.findOne(query);
+      res.send(result);
+    });
+    // add a publishers
+    app.post("/publishers", async (req, res) => {
+      const result = await publishers.insertOne(req.body);
+      res.send(result);
+    });
+    // edit publishers
+    app.patch("/publishers/:id", async (req, res) => {
+      const query = { _id: new ObjectId(req.params.id) };
+      delete req.body._id;
+      const result = await publishers.updateOne(query, { $set: req.body });
+      res.send(result);
+    });
+    // delete publishers
+    app.delete("/publishers/:id", async (req, res) => {
+      const query = { _id: new ObjectId(id) };
+      const result = await publishers.deleteOne(query);
       res.send(result);
     });
   } finally {
