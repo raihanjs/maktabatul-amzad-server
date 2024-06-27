@@ -28,6 +28,7 @@ async function run() {
   try {
     const database = client.db("maktabatul-amzad");
     const books = database.collection("books");
+    const writers = database.collection("writers");
 
     // -------------------------------Books Route-------------------------------
     // get all books
@@ -57,6 +58,36 @@ async function run() {
     app.delete("/books/:id", async (req, res) => {
       const query = { _id: new ObjectId(id) };
       const result = await books.deleteOne(query);
+      res.send(result);
+    });
+    // -------------------------------Writers Route-------------------------------
+    // get all writers
+    app.get("/writers", async (req, res) => {
+      const result = await writers.find().toArray();
+      res.send(result);
+    });
+    // get single writers by id
+    app.get("/writers/:id", async (req, res) => {
+      const query = { _id: new ObjectId(req.params.id) };
+      const result = await writers.findOne(query);
+      res.send(result);
+    });
+    // add a writers
+    app.post("/writers", async (req, res) => {
+      const result = await writers.insertOne(req.body);
+      res.send(result);
+    });
+    // edit writers
+    app.patch("/writers/:id", async (req, res) => {
+      const query = { _id: new ObjectId(req.params.id) };
+      delete req.body._id;
+      const result = await writers.updateOne(query, { $set: req.body });
+      res.send(result);
+    });
+    // delete writers
+    app.delete("/writers/:id", async (req, res) => {
+      const query = { _id: new ObjectId(id) };
+      const result = await writers.deleteOne(query);
       res.send(result);
     });
   } finally {
