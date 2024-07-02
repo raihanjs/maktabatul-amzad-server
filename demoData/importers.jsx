@@ -23,12 +23,18 @@
     _id: "667de4029b02df0adccdab2b",
     name: ["দমেস্ক, সিরিয়া", "Damascus, Syria", "دمشق، سوريا"],
   },
-  { _id: "667de40d9b02df0adccdab2c", name: ["তুরস্ক", "Türkiye", "تركيا"] },
+  {
+    _id: "667de40d9b02df0adccdab2c",
+    name: ["তুরস্ক", "Türkiye", "تركيا"],
+  },
   {
     _id: "667de4149b02df0adccdab2d",
     name: ["পাকিস্থান", "Pakistan", "باكستان"],
   },
-  { _id: "667de41c9b02df0adccdab2e", name: ["ভারত", "India", "الهند"] },
+  {
+    _id: "667de41c9b02df0adccdab2e",
+    name: ["ভারত", "India", "الهند"],
+  },
   {
     _id: "667de4259b02df0adccdab2f",
     name: ["বাংলাদেশ", "Bangladesh", "بنغلاديش"],
